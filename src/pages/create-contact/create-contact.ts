@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, DateTime } from 'ionic-angular';
 import { ContactsProvider } from '../../providers/contacts/contacts';
 
 /**
@@ -22,14 +22,19 @@ export class CreateContactPage {
     this.model = new Contact();
     this.model.name = 'Novo contato';
     this.model.gender = 'male';
-
+    this.model.birthday = '2019-01-01';
+    this.model.employed = true;
+    this.model.salary = 0.0;
   }
 
   createContact() {
     var data = {
       'contact': {
         'name': this.model.name,
-        'gender': this.model.gender
+        'gender': this.model.gender,
+        'birthday': this.model.birthday,
+        'employed': this.model.employed,
+        'salary': this.model.salary
       }
     };
     
@@ -51,4 +56,7 @@ export class CreateContactPage {
 export class Contact {
   name: string;
   gender: string;
+  birthday: string;
+  employed: boolean;
+  salary: number;
 }
