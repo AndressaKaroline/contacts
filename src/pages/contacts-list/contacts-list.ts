@@ -53,6 +53,18 @@ export class ContactsListPage {
     });
   }
 
+  openEditContact(id: number) {
+    this.contactsProvider.getContact(id)
+    .then((result: any) => {
+      this.navCtrl.push('ContactEditPage',  { 
+        contact: result 
+      });
+    })
+    .catch((error: any) => {
+      this.toast.create({ message: error.error }).present();
+    });
+  }
+  
   doRefresh(refresher) {
     setTimeout(() => {
       this.getContacts();
