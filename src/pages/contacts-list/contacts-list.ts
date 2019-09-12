@@ -46,6 +46,7 @@ export class ContactsListPage {
     this.contactsProvider.destroyContact(contact.id)
     .then((result: any) => {
       this.toast.create({ message: 'Excluído!', duration: 3000}).present();
+      this.getContacts();
     })
     .catch((error: any) => {
       this.toast.create({ message: error.error, duration: 3000 }).present();
