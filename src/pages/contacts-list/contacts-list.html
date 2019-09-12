@@ -6,18 +6,20 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>Contacts List</ion-title>
+    <ion-title>Lista de Contatos</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
+    refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
   <ion-list inset>
-    <ion-item *ngFor="let contact of contacts">
+    <ion-item *ngFor="let contact of contacts" (click)="openContact(contact.id)">
       <h2>{{contact.name}}</h2>
       <p>{{contact.gender}}</p>
-      <p>{{contact.birthday}}</p>
-      <p>{{contact.employed}}</p>
-      <p>{{contact.salary}}</p>
     </ion-item>
   </ion-list>
 </ion-content>

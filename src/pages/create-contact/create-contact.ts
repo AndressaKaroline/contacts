@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, DateTime } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { ContactsProvider } from '../../providers/contacts/contacts';
 
 /**
@@ -40,10 +40,10 @@ export class CreateContactPage {
     
     this.contactsProvider.addContact(data)
       .then((result: any) => {
-        this.toast.create({ message: 'Contato criado'}).present();
+        this.toast.create({ message: 'Contato criado', duration: 2000 }).present();
       })
       .catch((error: any) => {
-        this.toast.create({ message: 'Falha ao criar o contato: ' + JSON.stringify(error.error) }).present();
+        this.toast.create({ message: 'Falha ao criar o contato: ' + JSON.stringify(error.error), duration: 2000 }).present();
         console.log(error);
       });
   }
