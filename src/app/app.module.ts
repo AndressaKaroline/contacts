@@ -17,14 +17,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ContactsProvider } from '../providers/contacts/contacts';
 
-class CameraMock extends Camera {
-  getPicture(options) {
-    return new Promise((resolve, reject) => {
-      resolve("BASE_64_ENCODED_DATA_GOES_HERE");
-    })
-  }
-}
-
 @NgModule({
   declarations: [
     MyApp,
@@ -56,7 +48,7 @@ class CameraMock extends Camera {
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ContactsProvider,
-    { provide: Camera, useClass: CameraMock }
+    Camera
   ]
 })
 export class AppModule {}
