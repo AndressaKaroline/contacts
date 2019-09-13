@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 import { ContactsProvider } from '../../providers/contacts/contacts';
 import { ContactsListPage } from '../contacts-list/contacts-list';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import { Events } from 'ionic-angular'
 
 /**
  * Generated class for the ContactEditPage page.
@@ -20,9 +19,8 @@ import { Events } from 'ionic-angular'
 export class ContactEditPage {
 
   model: Contact;
-  photo: string = '';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private toast: ToastController, public contactsProvider: ContactsProvider, private camera: Camera, public events:Events) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private toast: ToastController, public contactsProvider: ContactsProvider, private camera: Camera) {
     if (this.navParams.data.contact) {
       this.model = this.navParams.data.contact;
     } else {
@@ -31,7 +29,6 @@ export class ContactEditPage {
   }
 
   takePicture() {
-    this.photo = '';
     const options: CameraOptions = {
       quality: 100,
       destinationType: this.camera.DestinationType.DATA_URL,
@@ -45,7 +42,7 @@ export class ContactEditPage {
     this.camera.getPicture(options)
       .then((imageData) => {
         let base64image = 'data:image/jpeg;base64,' + imageData;
-        this.photo = base64image;
+        this.model.photo = base64image;
       }, (error) => {
         console.error(error);
       })
@@ -74,5 +71,8 @@ export class Contact {
   id: number;
   name: string;
   gender: string;
+  birthday:string;
+  employed: string;
+  salary: string;
   photo: string;
 }
