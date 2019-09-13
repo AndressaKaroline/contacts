@@ -11,41 +11,46 @@
 </ion-header>
 
 <ion-content padding>
-    <div padding-top>
-        <ion-avatar>
-          <ion-icon name="contact" md="ios-contact-outline"></ion-icon>
-        </ion-avatar>
-        <h2>{{contact.name}}</h2>
-    </div>
-    
-      <ion-list>
-        <ion-item>
-          <ion-icon name="gender" slot="start"></ion-icon>
-          <ion-label>
-            <p>Gender</p>
-            <h2>{{contact.gender}}</h2>
-          </ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-icon name="calendar" slot="start"></ion-icon>
-          <ion-label>
-            <p>Birthday</p>
-            <h2>{{contact.birthday}}</h2>
-          </ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-icon name="employed" slot="start"></ion-icon>
-          <ion-label>
-            <p>Employed</p>
-            <h2>{{contact.employed}}</h2>
-          </ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-icon name="salary" slot="start"></ion-icon>
-          <ion-label>
-            <p>Salary</p>
-            <h2>{{contact.salary}}</h2>
-          </ion-label>
-        </ion-item>
-      </ion-list>
-  </ion-content>
+  <div padding-top>
+    <ion-avatar *ngIf="contact.photo === '';else photo">
+      <ion-icon name="contact" md="ios-contact-outline"></ion-icon>
+    </ion-avatar>
+    <ng-template #photo>
+      <ion-avatar>
+        <img src="{{contact.photo}}" />
+      </ion-avatar>
+    </ng-template>
+    <h2>{{contact.name}}</h2>
+  </div>
+
+  <ion-list>
+    <ion-item>
+      <ion-icon name="gender" slot="start"></ion-icon>
+      <ion-label>
+        <p>Gender</p>
+        <h2>{{contact.gender}}</h2>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="calendar" slot="start"></ion-icon>
+      <ion-label>
+        <p>Birthday</p>
+        <h2>{{contact.birthday}}</h2>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="employed" slot="start"></ion-icon>
+      <ion-label>
+        <p>Employed</p>
+        <h2>{{contact.employed}}</h2>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="salary" slot="start"></ion-icon>
+      <ion-label>
+        <p>Salary</p>
+        <h2>{{contact.salary}}</h2>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

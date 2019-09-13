@@ -16,7 +16,7 @@
       <ion-label stacked>Name</ion-label>
       <ion-input type="text" name="name" [(ngModel)]="model.name"></ion-input>
     </ion-item>
-  
+
     <ion-item>
       <ion-label stacked>Gender</ion-label>
       <ion-input type="text" name="gender" [(ngModel)]="model.gender"></ion-input>
@@ -36,8 +36,16 @@
       <ion-label stacked>Salary</ion-label>
       <ion-input type="number" name="salary" [(ngModel)]="model.salary"></ion-input>
     </ion-item>
+
+    <ion-item>
+      <!-- <ion-label stacked>Photo</ion-label> -->
+      <img src="{{photo}}" />
+      <button ion-button large color="dark" (click)="takePicture()">
+        <ion-icon name="camera"></ion-icon>
+      </button>
+    </ion-item>
   </ion-list>
-  <button ion-button block (click)="createContact()">
+  <button ion-button large block (click)="createContact()">
     Criar contato
-  </button>  
+  </button>
 </ion-content>

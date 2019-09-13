@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { ContactsProvider } from '../../providers/contacts/contacts';
 import { ContactsListPage } from '../contacts-list/contacts-list';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Events } from 'ionic-angular'
 
 /**
  * Generated class for the ContactEditPage page.
@@ -18,8 +20,9 @@ import { ContactsListPage } from '../contacts-list/contacts-list';
 export class ContactEditPage {
 
   model: Contact;
+  photo: string = '';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private toast: ToastController, private contactProvider: ContactsProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private toast: ToastController, public contactsProvider: ContactsProvider, private camera: Camera, public events:Events) {
     if (this.navParams.data.contact) {
       this.model = this.navParams.data.contact;
     } else {
@@ -27,8 +30,32 @@ export class ContactEditPage {
     }
   }
 
+  takePicture() {
+    this.photo = '';
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      allowEdit: true,
+      targetWidth: 100,
+      targetHeight: 100
+    }
+
+    this.camera.getPicture(options)
+      .then((imageData) => {
+        let base64image = 'data:image/jpeg;base64,' + imageData;
+        this.photo = base64image;
+      }, (error) => {
+        console.error(error);
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+  }
+
   saveContact() {
-    this.contactProvider.updateContact(this.model.id, this.model)
+    this.contactsProvider.updateContact(this.model.id, this.model)
       .then((result: any) => {
         this.toast.create({ message: 'Usuário salvo', duration: 3000 }).present();
         this.navCtrl.push(ContactsListPage);
@@ -47,4 +74,5 @@ export class Contact {
   id: number;
   name: string;
   gender: string;
+  photo: string;
 }
